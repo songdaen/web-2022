@@ -15,16 +15,16 @@
 		String pwd = request.getParameter("pwd");
 		
 		//DBCP로 변경 (커넥션 얻기)
-		//Context 객체 생성
-		Context initCtx = new InitialContext();
-		//JNDI에 등록된 Naming 자원들을 모두 가져옴
-		Context envCtx = (Context)initCtx.lookup("java:comp/env");
-		//DataSource 객체 얻어냄
-		DataSource ds = (DataSource)envCtx.lookup("jdbc/findme");
-		//Connection객체 얻어냄
-		Connection con = ds.getConnection();
-		
-	  //sql문
+				//Context 객체 생성
+				Context initCtx = new InitialContext();
+				//JNDI에 등록된 Naming 자원들을 모두 가져옴
+				Context envCtx = (Context)initCtx.lookup("java:comp/env");
+				//DataSource 객체 얻어냄
+				DataSource ds = (DataSource)envCtx.lookup("jdbc/findme");
+				//Connection객체 얻어냄
+				Connection con = ds.getConnection();
+
+		//sql문
 		String sql = "insert into login(id, name, pwd) values(?, ?, ?)";
 		
 		//sql문 실행

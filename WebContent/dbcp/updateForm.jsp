@@ -11,15 +11,19 @@
 %>
 
 <%
+		//jdbc 연동 드라이버 로드
+		Class.forName("org.mariadb.jdbc.Driver");
 
-		request.setCharacterEncoding("utf-8");
-
-		//DBCP로 변경 (커넥션 얻기)
+//DBCP로 변경 (커넥션 얻기)
+		//Context 객체 생성
 		Context initCtx = new InitialContext();
+		//JNDI에 등록된 Naming 자원들을 모두 가져옴
 		Context envCtx = (Context)initCtx.lookup("java:comp/env");
+		//DataSource 객체 얻어냄
 		DataSource ds = (DataSource)envCtx.lookup("jdbc/findme");
+		//Connection객체 얻어냄
 		Connection con = ds.getConnection();
-
+		
 		//sql문
 		String sql = "select * from login where id=?";
 		
@@ -52,7 +56,7 @@
 <div class="container">
 
 <h2>SIGN UP</h2>
-   <form action="updatePro.jsp" method="get"> 
+   <form action="updatePro.jsp?id=<%= id %>" method="get"> 
    
      <div class="form-group">
    	  ID :
